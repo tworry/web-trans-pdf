@@ -25,11 +25,12 @@ async function isLoggedIn(page) {
   return signInTag;
 }
 
-async function login(page) {
+async function login(page, email, password) {
   console.log('======function login======');
+  console.log(email, password);
   await page.goto(loginUrl);
   // email
-  await page.type('input[type="email"]', 'tworry@gmail.com');
+  await page.type('input[type="email"]', email);
   console.log('input email');
   await page.waitForTimeout(1000);
   await page.click('div#identifierNext > div > button');
@@ -38,7 +39,7 @@ async function login(page) {
   // password
   await page.waitForSelector('input[type="password"]');
   await page.waitForTimeout(2000);
-  await page.type('input[type="password"]', 'wangrui1');
+  await page.type('input[type="password"]', password);
   console.log('input password');
   await page.waitForTimeout(1000);
   await page.waitForSelector('div#passwordNext > div > button');
@@ -55,7 +56,8 @@ async function login(page) {
   await page.waitForTimeout(1000);
 }
 
-async function generatePdf() {
+async function generatePdf(email, password) {
+  console.log('==========generatePdf=======', email, password);
   const browser = await puppeteer.launch({
     headless: false,
     defaultViewport: null,
@@ -72,7 +74,7 @@ async function generatePdf() {
 
   const loggedIn = await isLoggedIn(page);
   if (!loggedIn) {
-    await login(page);
+    await login(page, email, password);
   }
 
   await page.goto(targetUrl, { waitUntil: 'networkidle0' });
@@ -111,7 +113,7 @@ async function generatePdf() {
 
   await browser.close();
 
-  return true
+  return true;
 }
 
 module.exports = generatePdf;

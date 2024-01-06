@@ -11,7 +11,10 @@ router.get('/', function (req, res, next) {
 
 router.post('/create', async function (req, res, next) {
   // 处理 POST 请求
-  const pdf = await generatePdf();
+  const email = req.body.email;
+  const password = req.body.password;
+
+  const pdf = await generatePdf(email,password);
 
   if (pdf) {
     await createZip();
@@ -20,7 +23,7 @@ router.post('/create', async function (req, res, next) {
 });
 
 router.get('/download', function (req, res, next) {
-  const file = path.resolve(__dirname, '../public/pdfs/dowload.zip'); // 设置文件路径
+  const file = path.resolve(__dirname, '../public/pdfs/download.zip'); // 设置文件路径
   res.setHeader('Cache-Control', 'no-store');
   res.download(file, function (err) {
     if (err) {

@@ -4,7 +4,7 @@ const path = require('path');
 
 async function createZip() {
   return new Promise((resolve, reject) => {
-    let output = fs.createWriteStream('public/pdfs/dowload.zip');
+    let output = fs.createWriteStream('public/pdfs/download.zip');
 
     let archive = archiver('zip', {
       zlib: { level: 9 },

@@ -9,9 +9,19 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
     function create() {
-      axios.post('/create', {})
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      const downloadBtn = document.getElementById('downloadBtn');
+      downloadBtn.style.display = 'none';
+
+      axios.post('/create', {
+        email: email,
+        password: password
+      })
         .then(function (response) {
           console.log(response);
+          downloadBtn.style.display = 'block';
         })
         .catch(function (error) {
           console.log(error);
@@ -35,13 +45,18 @@
 </head>
 
 <body>
-  <button onclick="create()">create pdf files</button>
-  <button onclick="download()">download</button>
-  <a href="">
-    <div>
-      <h2></h2>
+  <div class="main">
+    <div class="login-form">
+      <h2> google账号： </h2>
+      <div> 账号： <input type="text" id="email" name="email"> </div>
+      <div> 密码： <input type="password" id="password" name="password"> </div>
     </div>
-  </a>
+  
+    <div class="btn-wrap">
+      <button onclick="create()" id="createBtn">create pdf files</button>
+      <button onclick="download()" id="downloadBtn" style="display: none;">download</button>
+    </div>
+  </div>
 </body>
 
 </html>
