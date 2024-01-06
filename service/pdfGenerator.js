@@ -81,7 +81,7 @@ async function generatePdf() {
   const articles = await page.$$('article');
   const pagePromises = [];
 
-  for (let i = 0; i < Math.min(articles.length, 2); i++) {
+  for (let i = 0; i < Math.min(articles.length, 10); i++) {
     const article = articles[i];
 
     const linkHandle = await article.evaluate((node) => {

@@ -9,9 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
     function create() {
-      axios.post('/create', {
-        name: 'John Doe'
-      })
+      axios.post('/create', {})
         .then(function (response) {
           console.log(response);
         })
@@ -22,7 +20,12 @@
     function download() {
       axios.get('/download')
         .then(function (response) {
-          console.log(response);
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', 'download.zip'); // or any other extension
+          document.body.appendChild(link);
+          link.click();
         })
         .catch(function (error) {
           console.log(error);
@@ -34,11 +37,11 @@
 <body>
   <button onclick="create()">create pdf files</button>
   <button onclick="download()">download</button>
-<a href="">
-  <div>
-    <h2></h2>
-  </div>
-</a>
+  <a href="">
+    <div>
+      <h2></h2>
+    </div>
+  </a>
 </body>
 
 </html>
