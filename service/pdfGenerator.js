@@ -2,7 +2,6 @@ const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const AnonymizeUAPlugin = require('puppeteer-extra-plugin-anonymize-ua');
 const path = require('path');
-// const translate = require('@vitalets/google-translate-api');
 
 const mainUrl = 'https://medium.com/';
 const loginUrl =
