@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    function create() {
+      axios.post('/create', {
+        name: 'John Doe'
+      })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+    function download() {
+      axios.get('/download')
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  </script>
+</head>
+
+<body>
+  <button onclick="create()">create pdf files</button>
+  <button onclick="download()">download</button>
+<a href="">
+  <div>
+    <h2></h2>
+  </div>
+</a>
+</body>
+
+</html>
