@@ -15,17 +15,22 @@
       const downloadBtn = document.getElementById('downloadBtn');
       downloadBtn.style.display = 'none';
 
-      axios.post('/create', {
-        email: email,
-        password: password
-      })
-        .then(function (response) {
-          console.log(response);
-          downloadBtn.style.display = 'block';
+      if (email && password) {
+        axios.post('/create', {
+          email: email,
+          password: password
         })
-        .catch(function (error) {
-          console.log(error);
-        });
+          .then(function (response) {
+            console.log(response);
+            downloadBtn.style.display = 'block';
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      } else {
+        alert('请输入账号密码');
+      }
+
     }
     function download() {
       axios.get('/download')
@@ -51,7 +56,7 @@
       <div> 账号： <input type="text" id="email" name="email"> </div>
       <div> 密码： <input type="password" id="password" name="password"> </div>
     </div>
-  
+
     <div class="btn-wrap">
       <button onclick="create()" id="createBtn">create pdf files</button>
       <button onclick="download()" id="downloadBtn" style="display: none;">download</button>
