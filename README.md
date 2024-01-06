@@ -2,6 +2,10 @@
 
 by `tworry`
 
+## environment
+
+- node v16.20.2
+
 ## init
 
 ``` bash
